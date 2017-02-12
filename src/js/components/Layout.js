@@ -1,39 +1,44 @@
 import React from "react";
 
+import axios from 'axios';
+
+import ContactStore from "../stores/ContactStore";
+
+import * as ContactActions from "../actions/ContactActions";
+
 import Contact from "./Contact";
+
 
 export default class Layout extends React.Component {
     constructor() {
         super();
         this.state = {
             title: "Contacts Book",
-            contacts: [
-                {
-                    name: "Josh",
-                    surname: "Williams",
-                    phone: "555-333-123"
-                },
-                {
-                    name: "Mia",
-                    surname: "Williams",
-                    phone: "555-344-123"
-                },
-                {
-                    name: "Michael",
-                    surname: "Doe",
-                    phone: "123-344-123"
-                }
-            ]
+            contacts: []
         };
     }
 
+    componentDidMount() {
+        // var contacts = ContactActions.getContacts();
+        // // const contacts = ContactActions.getContacts()
+        // this.setState({ contacts });
+
+        axios.get('/data.json').then(res => {
+
+            const contacts = res.data;
+            // console.log(state.contacts)
+            this.setState({ contacts });
+            // dispatcher.dispatch({type: "RECEIVE_CONTACTS", contacts: res.data});
+        });
+    }
+
     render() {
+        // const { contacts } = this.state;
+        // console.log(this.state)
         return (
             <div class="container">
                 <h1>{this.state.title}</h1>
-                <div class="row">
-                    <Contact contacts={this.state.contacts}/>
-                </div>
+                <Contact contacts={this.state.contacts}/>
             </div>
         );
     }
