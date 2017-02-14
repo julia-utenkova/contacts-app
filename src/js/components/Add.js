@@ -1,5 +1,9 @@
 import React from "react";
 
+import ContactStore from "../stores/ContactStore";
+
+import * as ContactActions from "../actions/ContactActions";
+
 export default class Add extends React.Component {
 
     addPerson = () => {
@@ -14,15 +18,7 @@ export default class Add extends React.Component {
             phone: phone
         };
 
-        // const newArray = update(initialArray, {$push: contact});
-
-
-        this.props.contacts.push(contact);
-        this.setState({contacts: this.contacts});
-
-        console.log(this.props.contacts)
-
-        // this.emit("change");
+        ContactActions.addContacts(contact)
 
     };
 

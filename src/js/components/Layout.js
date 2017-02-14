@@ -1,7 +1,5 @@
 import React from "react";
 
-import axios from 'axios';
-
 import ContactStore from "../stores/ContactStore";
 
 import * as ContactActions from "../actions/ContactActions";
@@ -18,23 +16,21 @@ export default class Layout extends React.Component {
         };
     }
 
-    componentDidMount() {
-        // var contacts = ContactActions.getContacts();
-        // // const contacts = ContactActions.getContacts()
-        // this.setState({ contacts });
+    componentWillMount() {
+        ContactStore.on("change", () => {
+            this.setState({
+                contacts: ContactStore.getAll()
+            })
+        });
 
-        axios.get('/data.json').then(res => {
-
-            const contacts = res.data;
-            // console.log(state.contacts)
-            this.setState({ contacts });
-            // dispatcher.dispatch({type: "RECEIVE_CONTACTS", contacts: res.data});
+        ContactStore.on("change", () => {
+            this.setState({
+                contacts: ContactStore.getAll()
+            })
         });
     }
 
     render() {
-        // const { contacts } = this.state;
-        // console.log(this.state)
         return (
             <div class="container">
                 <h1>{this.state.title}</h1>
