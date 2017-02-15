@@ -18,3 +18,10 @@ export function addContacts(contact) {
         contact: contact
     });
 }
+
+export function removeContact(contact_id) {
+    dispatcher.dispatch({
+        type: "REMOVE_CONTACT",
+        contact_id: contact_id
+    });
+}

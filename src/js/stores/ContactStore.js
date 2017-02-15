@@ -1,5 +1,7 @@
 import { EventEmitter } from "events";
 
+import update from 'react-addons-update';
+
 import dispatcher from "../dispatcher";
 
 import * as ContactActions from "../actions/ContactActions";
@@ -16,14 +18,24 @@ class ContactStore extends EventEmitter {
 
     addContact(contact) {
         this.contacts.push(contact);
+    }
 
-        this.emit("change");
+    removeContact(contact_id) {
+        this.contacts = update(this.contacts, {$splice: [[contact_id, 1]]});
+        console.log("removed " + contact_id, this.contacts)
+
     }
 
     handleActions(action){
         switch (action.type){
             case "ADD_CONTACT": {
                 this.addContact(action.contact);
+                this.emit("change");
+                break;
+            }
+            case "REMOVE_CONTACT": {
+                this.removeContact(action.contact_id);
+                this.emit("change");
                 break;
             }
             case "RECEIVE_CONTACTS": {

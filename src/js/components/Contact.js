@@ -1,8 +1,12 @@
 import React from "react";
 
+import update from 'react-addons-update';
+
 import Sort from "./Sort";
 
 import Add from "./Add";
+
+import * as ContactActions from "../actions/ContactActions";
 
 export default class Contact extends React.Component {
 
@@ -24,6 +28,12 @@ export default class Contact extends React.Component {
         this.setState({'contacts': sortedContacts});
     };
 
+    removeContact = (e) => {
+        e.preventDefault();
+        let event_id = parseInt(e.target.getAttribute('data-id'));
+        ContactActions.removeContact(event_id)
+    }
+
     render() {
         return (
             <div className="row">
@@ -34,15 +44,15 @@ export default class Contact extends React.Component {
 
                         <tbody>
                         {this.props.contacts.map(function(contact) {
-                            return <tr class="flex-center" key={contact.name}>
-                                <td class="item">{contact.name}</td>
+                            return <tr class="flex-center" key={contact.id} contact-id={contact.id}>
+                                <td class="item">{contact.name} ({contact.id})</td>
                                 <td class="item">{contact.email}</td>
                                 <td class="item">{contact.phone}</td>
                                 <td class="item">
-                                    Remove
+                                    <a href="" data-id={contact.id} onClick={this.removeContact}>X</a>
                                 </td>
                             </tr>;
-                        })}
+                        }, this)}
                         </tbody>
                     </table>
 

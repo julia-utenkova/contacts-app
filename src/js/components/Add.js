@@ -6,8 +6,7 @@ import * as ContactActions from "../actions/ContactActions";
 
 export default class Add extends React.Component {
 
-    addPerson = () => {
-        // e.preventDefault();
+    addContact = () => {
         var name = this.form_name.value;
         var email = this.form_email.value;
         var phone = this.form_phone.value;
@@ -37,7 +36,7 @@ export default class Add extends React.Component {
                     <label for="phone">Phone number</label>
                     <input type="text" class="form-control" id="phone" placeholder="Phone number" ref={(c) => this.form_phone = c}/>
                 </div>
-                <button type="button" class="btn btn-default" onClick={this.addPerson.bind(this)}>Add person</button>
+                <button type="button" class="btn btn-default" onClick={this.addContact.bind(this)}>Add person</button>
             </form>
         );
     }

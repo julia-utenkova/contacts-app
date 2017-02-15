@@ -22,12 +22,6 @@ export default class Layout extends React.Component {
                 contacts: ContactStore.getAll()
             })
         });
-
-        ContactStore.on("change", () => {
-            this.setState({
-                contacts: ContactStore.getAll()
-            })
-        });
     }
 
     render() {
