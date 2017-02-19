@@ -55,7 +55,7 @@ export default class GenderChart extends React.Component {
         g.append("text")
             .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
             .attr("dy", ".35em")
-            .text(function(d) { return d.data.key; });
+            .text(function(d) { return d.data.key + " (" + d.data.values.length + ")"; });
 
     };
 

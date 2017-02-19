@@ -24,7 +24,7 @@ var connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
     password: 'root',
-    database: 'contacts'
+    database: 'contacts-app'
 });
 
 connection.connect(function(error){
@@ -38,7 +38,7 @@ connection.connect(function(error){
 app.use(bodyParser.json())
 
 app.get('/api/data', function(request, response) {
-    connection.query("SELECT * FROM contact", function(error, rows, field){
+    connection.query("SELECT * FROM contacts", function(error, rows, field){
         if (error) {
             console.log(error)
         } else {
@@ -55,7 +55,7 @@ app.post('/api/add-contact', function(request, response) {
     values.push([jsondata.id, jsondata.name, jsondata.phone, jsondata.gender, jsondata.email]);
 
     //Bulk insert using nested array [ [a,b],[c,d] ] will be flattened to (a,b),(c,d)
-    connection.query('INSERT INTO contact (id, name, phone, gender, email) VALUES ?', [values], function(err,result) {
+    connection.query('INSERT INTO contacts (id, name, phone, gender, email) VALUES ?', [values], function(err,result) {
         if(err) {
             response.send('Error');
         }
@@ -69,7 +69,7 @@ app.post('/api/remove-contact', function(request, response){
 
     var jsondata = request.body.id;
 
-    connection.query('DELETE FROM contact WHERE id= ?', [jsondata], function(err, result) {
+    connection.query('DELETE FROM contacts WHERE id= ?', [jsondata], function(err, result) {
         console.log(err)
         if (err) {
             response.send('Error');
