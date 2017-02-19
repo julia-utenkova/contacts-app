@@ -52,15 +52,15 @@ app.post('/api/add-contact', function(request, response) {
     var jsondata = request.body;
     var values = [];
 
-    values.push([jsondata.id, jsondata.name, jsondata.phone, jsondata.gender, jsondata.email]);
+    values.push([jsondata.name, jsondata.phone, jsondata.gender, jsondata.email]);
 
     //Bulk insert using nested array [ [a,b],[c,d] ] will be flattened to (a,b),(c,d)
-    connection.query('INSERT INTO contacts (id, name, phone, gender, email) VALUES ?', [values], function(err,result) {
+    connection.query('INSERT INTO contacts (name, phone, gender, email) VALUES ?', [values], function(err,result) {
         if(err) {
             response.send('Error');
         }
         else {
-            response.send('Success');
+            response.status(200).json({id: result.insertId});
         }
     });
 });
@@ -69,8 +69,9 @@ app.post('/api/remove-contact', function(request, response){
 
     var jsondata = request.body.id;
 
+    console.log(jsondata)
+
     connection.query('DELETE FROM contacts WHERE id= ?', [jsondata], function(err, result) {
-        console.log(err)
         if (err) {
             response.send('Error');
         } else {

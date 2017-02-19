@@ -24,6 +24,10 @@ class ContactStore extends EventEmitter {
         this.contacts = update(this.contacts, {$splice: [[contact_id, 1]]});
     }
 
+    retrieveID(id) {
+        return id;
+    }
+
     handleActions(action){
         switch (action.type){
             case "ADD_CONTACT": {
@@ -38,6 +42,12 @@ class ContactStore extends EventEmitter {
             }
             case "RECEIVE_CONTACTS": {
                 this.contacts = action.contacts;
+                this.emit("change");
+                break;
+            }
+            case "RETRIEVE_ADDED_ID": {
+                // this.id = action.id;
+                this.retrieveID(action.id);
                 this.emit("change");
                 break;
             }

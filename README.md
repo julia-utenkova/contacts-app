@@ -1,5 +1,5 @@
 # contacts-app
-Small contacts book app using React/Flux/Webpack
+Small contacts book app using React/Flux/Webpack/Express
 
 1.) <code>git clone https://github.com/julia-utenkova/contacts-app</code> <br>
 2.) <code>npm install</code> <br>

@@ -12,12 +12,12 @@ export default class GenderChart extends React.Component {
 
         d3.select("#gender-chart svg").remove()
 
-        var width = 150,
-            height = 150,
+        var width = 230,
+            height = 230,
             radius = Math.min(width, height) / 2;
 
         var color = d3.scale.ordinal()
-            .range(["#1abc9c", "#9b59b6", "#f1c40f", "#34495e", "#e74c3c", "#f39c12", "#2980b9"]);
+            .range(["#f39c12", "#2980b9", "#f1c40f", "#34495e", "#e74c3c", "#f39c12", "#2980b9"]);
 
         data = d3.nest()
             .key(function(d) { return d.gender; })
@@ -59,10 +59,18 @@ export default class GenderChart extends React.Component {
 
     };
 
+    componentWillMount() {
+        ContactStore.on("change", () => {
+            this.drawChart(this.props.contacts)
+        });
+    }
+
     render() {
-        this.drawChart(this.props.contacts)
         return (
-            <div id="gender-chart"></div>
+            <div>
+                <h2>Male/Female distribution</h2>
+                <div id="gender-chart"></div>
+            </div>
         );
     }
 }

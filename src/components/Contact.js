@@ -11,20 +11,7 @@ import * as ContactActions from "../actions/ContactActions";
 export default class Contact extends React.Component {
 
     sortBy = (field, contacts) => {
-        // Sorting ...
-        this.asc = !this.asc;
-        var sortedContacts = contacts.sort( (a, b) => {
-
-            if (a[field] > b[field]) {
-                return this.asc ? 1 : -1;
-            }
-            if (a[field] < b[field]) {
-                return this.asc ? -1 : 1;
-            }
-            return 0;
-        });
-
-        // Then call setState
+        var sortedContacts = ContactActions.sortBy(field, contacts);
         this.setState({'contacts': sortedContacts});
     };
 
@@ -34,7 +21,8 @@ export default class Contact extends React.Component {
         var id = {
             id: event_id
         };
-        ContactActions.removeContact(id)
+        ContactActions.removeContact(id);
+        
     }
 
     render() {
@@ -63,6 +51,7 @@ export default class Contact extends React.Component {
                 </div>
 
                 <div className="col-lg-4">
+                    <h2>Add new contact</h2>
                     <Add contacts={this.props.contacts}/>
                     <GenderChart contacts={this.props.contacts}/>
                 </div>

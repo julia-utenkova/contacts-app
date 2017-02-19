@@ -6,23 +6,28 @@ import * as ContactActions from "../actions/ContactActions";
 
 export default class Add extends React.Component {
 
+    constructor() {
+        super();
+        this.addContact = this.addContact.bind(this)
+    }
+
     addContact = () => {
         var name = this.form_name.value;
         var email = this.form_email.value;
         var phone = this.form_phone.value;
         var gender = this.gender.value;
 
-        // console.log(this.props.contacts.length)
+        // var newID = ContactStore.retrieveID;
 
         var contact = {
-            id: this.props.contacts.length + 1,
+            // id: newID,
             name: name,
             email: email,
             phone: phone,
             gender: gender
         };
 
-        ContactActions.addContacts(contact)
+        ContactActions.addContacts(contact);
 
     };
 
@@ -45,7 +50,7 @@ export default class Add extends React.Component {
                     <label for="gender">Gender</label>
                     <input type="text" className="form-control" id="gender" placeholder="Gender" ref={(c) => this.gender = c}/>
                 </div>
-                <button type="button" className="btn btn-default" onClick={this.addContact.bind(this)}>Add person</button>
+                <button type="button" className="btn btn-default" onClick={this.addContact}>Add person</button>
             </form>
         );
     }
