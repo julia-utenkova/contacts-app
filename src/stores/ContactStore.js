@@ -22,8 +22,6 @@ class ContactStore extends EventEmitter {
 
     removeContact(contact_id) {
         this.contacts = update(this.contacts, {$splice: [[contact_id, 1]]});
-        console.log("removed " + contact_id, this.contacts)
-
     }
 
     handleActions(action){

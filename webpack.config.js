@@ -1,31 +1,52 @@
-var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    context: path.join(__dirname, "src"),
-    devtool: debug ? "inline-sourcemap" : null,
-    entry: "./js/app.js",
+    entry: [
+        './src/index.js'
+    ],
     module: {
         loaders: [
             {
                 test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['react', 'es2015', 'stage-0'],
-                    plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties'],
+                loader: 'babel',
+                exclude: /node_modules/,
+                query:
+                {
+                    presets:['react']
                 }
+            },
+            {
+                test: /\.css$/,
+                loaders: [
+                    'style?sourceMap',
+                    'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+                ]
+            },
+            {
+                loader: 'json-loader',
+                test: /\.json$/
             }
         ]
     },
-    output: {
-        path: __dirname + "/src/",
-        filename: "app.min.js"
+    resolve: {
+        extensions: ['', '.js']
     },
-    plugins: debug ? [] : [
-        new webpack.optimize.DedupePlugin(),
+    output: {
+        path: path.join(__dirname, '/dist'),
+        publicPath: '/',
+        filename: 'bundle.js'
+    },
+    devServer: {
+        contentBase: './dist',
+        hot: true
+    },
+    plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
     ],
+    node: {
+        fs: "empty"
+    }
 };

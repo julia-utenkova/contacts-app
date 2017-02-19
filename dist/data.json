@@ -3,24 +3,28 @@
     "id": 0,
     "name": "Josh Williams",
     "email": "williams@gmail.com",
-    "phone": "555-333-123"
+    "phone": "555-333-123",
+    "gender": "male"
   },
   {
     "id": 1,
     "name": "Anthony Williams",
     "email": "anthony@mail.com",
-    "phone": "555-344-123"
+    "phone": "555-344-123",
+    "gender": "male"
   },
   {
     "id": 2,
     "name": "Michael Doe",
     "email": "doe@mail.com",
-    "phone": "123-344-123"
+    "phone": "123-344-123",
+    "gender": "male"
   },
   {
     "id": 3,
     "name": "Susan Lala",
     "email": "susan@gmail.com",
-    "phone": "123-344-123"
+    "phone": "123-344-123",
+    "gender": "female"
   }
 ]

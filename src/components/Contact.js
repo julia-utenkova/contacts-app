@@ -1,10 +1,10 @@
 import React from "react";
 
-import update from 'react-addons-update';
-
 import Sort from "./Sort";
 
 import Add from "./Add";
+
+import GenderChart from "./GenderChart";
 
 import * as ContactActions from "../actions/ContactActions";
 
@@ -31,24 +31,28 @@ export default class Contact extends React.Component {
     removeContact = (e) => {
         e.preventDefault();
         let event_id = parseInt(e.target.getAttribute('data-id'));
-        ContactActions.removeContact(event_id)
+        var id = {
+            id: event_id
+        };
+        ContactActions.removeContact(id)
     }
 
     render() {
         return (
             <div className="row">
-                <div class="col-lg-8">
+                <div className="col-lg-8">
 
-                    <table class="table table-striped">
+                    <table className="table table-striped">
                         <Sort contacts={this.props.contacts} sortBy={this.sortBy}/>
 
                         <tbody>
                         {this.props.contacts.map(function(contact) {
-                            return <tr class="flex-center" key={contact.id} contact-id={contact.id}>
-                                <td class="item">{contact.name} ({contact.id})</td>
-                                <td class="item">{contact.email}</td>
-                                <td class="item">{contact.phone}</td>
-                                <td class="item">
+                            return <tr className="flex-center" key={contact.id}>
+                                <td className="item">{contact.name} ({contact.id})</td>
+                                <td className="item">{contact.gender}</td>
+                                <td className="item">{contact.email}</td>
+                                <td className="item">{contact.phone}</td>
+                                <td className="item">
                                     <a href="" data-id={contact.id} onClick={this.removeContact}>X</a>
                                 </td>
                             </tr>;
@@ -60,6 +64,7 @@ export default class Contact extends React.Component {
 
                 <div className="col-lg-4">
                     <Add contacts={this.props.contacts}/>
+                    <GenderChart contacts={this.props.contacts}/>
                 </div>
             </div>
         );
