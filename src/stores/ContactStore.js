@@ -47,6 +47,7 @@ class ContactStore extends EventEmitter {
             }
             case "RETRIEVE_ADDED_ID": {
                 // this.id = action.id;
+                console.log(action.id)
                 this.retrieveID(action.id);
                 this.emit("change");
                 break;

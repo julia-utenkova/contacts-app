@@ -35,19 +35,19 @@ export default class Add extends React.Component {
         return (
             <form>
                 <div className="form-group">
-                    <label for="name">Name</label>
+                    <label htmlFor="name">Name</label>
                     <input type="name" className="form-control" id="name" placeholder="Name" ref={(c) => this.form_name = c}/>
                 </div>
                 <div className="form-group">
-                    <label for="email">Email</label>
+                    <label htmlFor="email">Email</label>
                     <input type="email" className="form-control" id="email" placeholder="Email" ref={(c) => this.form_email = c}/>
                 </div>
                 <div className="form-group">
-                    <label for="phone">Phone number</label>
+                    <label htmlFor="phone">Phone number</label>
                     <input type="text" className="form-control" id="phone" placeholder="Phone number" ref={(c) => this.form_phone = c}/>
                 </div>
                 <div className="form-group">
-                    <label for="gender">Gender</label>
+                    <label htmlFor="gender">Gender</label>
                     <input type="text" className="form-control" id="gender" placeholder="Gender" ref={(c) => this.gender = c}/>
                 </div>
                 <button type="button" className="btn btn-default" onClick={this.addContact}>Add person</button>
